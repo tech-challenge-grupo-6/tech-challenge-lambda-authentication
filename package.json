@@ -1,0 +1,22 @@
+{
+  "name": "auth-users-lambda",
+  "version": "1.0.0",
+  "description": "",
+  "main": "handler.js",
+  "scripts": {
+    "start": "nodemon -e js  --exec \"sls offline start\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "serverless-dotenv-plugin": "^6.0.0",
+    "serverless-offline": "^13.3.3",
+    "serverless-prune-plugin": "^2.0.2"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.1567.0",
+    "nodemon": "^3.1.0"
+  }
+}

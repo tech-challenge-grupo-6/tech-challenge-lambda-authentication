@@ -1,0 +1,4 @@
+environment:
+  IS_OFFLINE=true
+  USER_POOL_ID=us-east-1_lnmvkmOPF
+  CLIENT_ID=4d0vslfihgs3lvlpt4lbl7dg9h
