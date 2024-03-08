@@ -1,0 +1,53 @@
+service: auth-users-lambda
+frameworkVersion: "3"
+provider:
+  name: aws
+  runtime: nodejs18.x
+  environment:
+    user_pool_id: "" #adicionar o user pool id
+    client_id: "" #adcionar o client id
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - cognito-idp:AdminInitiateAuth
+        - cognito-idp:AdminCreateUser
+        - cognito-idp:AdminSetUserPassword
+      Resource: "*"
+functions:
+  loginUser:
+    handler: handler.login
+    events:
+      - http:
+          path: user/login
+          method: post
+          cors: true
+  signupUser:
+    handler: handler.signup
+    events:
+      - http:
+          path: user/signup
+          method: post
+          cors: true
+  privateAPI:
+    handler: handler.private
+    events:
+      - http:
+          path: user/private
+          method: post
+          cors: true
+          integration: lambda
+          authorizer:
+            name: PrivateAuthorizer
+            type: COGNITO_USER_POOLS
+            arn: "" #adicionar o arn
+            claims:
+              - email
+custom:
+  prune:
+    automatic: true
+    number: 3
+
+plugins:
+  - serverless-offline
+  - serverless-prune-plugin
+  - serverless-dotenv-plugin
