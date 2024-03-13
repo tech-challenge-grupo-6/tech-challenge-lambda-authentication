@@ -4,8 +4,8 @@ provider:
   name: aws
   runtime: nodejs18.x
   environment:
-    user_pool_id: "" #adicionar o user pool id
-    client_id: "" #adcionar o client id
+    user_pool_id: "__USER_POOL_ID__" #adicionar o user pool id
+    client_id: "__CLIENT_ID__" #adcionar o client id
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -39,7 +39,7 @@ functions:
           authorizer:
             name: PrivateAuthorizer
             type: COGNITO_USER_POOLS
-            arn: "" #adicionar o arn
+            arn: "__USER_POOL_ARN__" #adicionar o arn
             claims:
               - email
 custom:

@@ -1,23 +1,55 @@
-name: Deploy-Lambda-Authentication
+name: Deploy Lambda Authentication
 
 on:
-  pull_request:
-    branches:
-      - develop
+  workflow_dispatch:
 
 jobs:
-  plan-dev:
-    name: 'lambda-authentication-dev'
+  deploy-lambda:
     runs-on: ubuntu-latest
 
     defaults:
       run:
-        shell: bash
+        working-directory: ./resources
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
-    
-    env:
+        uses: actions/checkout@v3
+
+      - name: "Configure AWS Credentials"
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Get Cognito Information
+        run:
+          USER_POOL_ID=$(aws cognito-idp list-user-pools --max-results 60 | jq -r '.UserPools[] | select(.Name=="techchallenge-users") | .Id')
+          CLIENT_ID=$(aws cognito-idp list-user-pool-clients --user-pool-id $USER_POOL_ID | jq -r '.UserPoolClients[0].ClientId')
+          USER_POOL_ARN=$(aws cognito-idp describe-user-pool --user-pool-id $USER_POOL_ID | jq -r '.UserPool.Arn')
+          echo "USER_POOL_ID=$USER_POOL_ID" >> $GITHUB_ENV
+          echo "CLIENT_ID=$CLIENT_ID" >> $GITHUB_ENV
+          echo "USER_POOL_ARN=$USER_POOL_ARN" >> $GITHUB_ENV
+
+      - name: Replace tokens in Kubernetes files
+        uses: cschleiden/replace-tokens@v1
+        with:
+          files: "serverless.yml"
+          tokenPrefix: "__"
+          tokenSuffix: "__"
+
+      - name: Use Node.js 18
+        uses: actions/setup-node@v1
+        with:
+          node-version: 18.x
+
+      - name: NPM CI
+        run: npm ci
+
+      - name: Serverless deploy
+        uses: serverless/github-action@v3
+        with:
+          args: deploy
+        env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
