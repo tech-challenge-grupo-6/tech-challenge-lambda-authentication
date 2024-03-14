@@ -1,0 +1,212 @@
+{
+	"info": {
+		"_postman_id": "0ce5f6df-73d9-4b58-952b-843d2698eb42",
+		"name": "Autenticação Tech Challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24235153"
+	},
+	"item": [
+		{
+			"name": "Local",
+			"item": [
+				{
+					"name": "signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"renansx20@gmail.com\",\n    \"cpf\": \"60564413003\",\n    \"name\": \"Renan\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/dev/user/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"dev",
+								"user",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"renansx2013@hotmail.com\",\n    \"cpf\": \"60564413003\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/dev/user/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"dev",
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "autenticate",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJraWQiOiI3Z25DK1VYKzZzNkxPR2pjS1VGMmU0WHR5dnU4cmhzNHNZcGVPOVwvUFppTT0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI5NDM4YzQ2OC1lMDExLTcwMDgtNDYyYy1iMmEyZTdiMmZmYzQiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiaXNzIjoiaHR0cHM6XC9cL2NvZ25pdG8taWRwLnVzLWVhc3QtMS5hbWF6b25hd3MuY29tXC91cy1lYXN0LTFfbG5tdmttT1BGIiwiY29nbml0bzp1c2VybmFtZSI6Ijk0MzhjNDY4LWUwMTEtNzAwOC00NjJjLWIyYTJlN2IyZmZjNCIsIm9yaWdpbl9qdGkiOiI5YzM1NjJkMS0yMTE0LTQ4YzQtOTdlYS0yOTUyMjA5NzY2NzQiLCJhdWQiOiI0ZDB2c2xmaWhnczNsdmxwdDRsYmw3ZGc5aCIsImV2ZW50X2lkIjoiYWMyNTBhOGQtNzA4Zi00NmMzLTg1MzgtZTk0MDAxOGQ3NzFmIiwiY3VzdG9tOm5hbWUiOiJSZW5hbiIsInRva2VuX3VzZSI6ImlkIiwiYXV0aF90aW1lIjoxNzA5Njg1MTcwLCJleHAiOjE3MDk2ODg3NzAsImN1c3RvbTpjcGYiOiIyNzc1MDUwMDAwNiIsImlhdCI6MTcwOTY4NTE3MCwianRpIjoiZTA4MThjZmYtY2IxMC00YzI4LWJkMzUtNDc1MTdkNTE1OTVmIiwiZW1haWwiOiJyZW5hbnN4dGVzdGVAaG90bWFpbC5jb20ifQ.LLRqv2EPBahFBVmWJNG0umyvipb7A4q18l7Lm4fVPaqmaE3GiwTZlgEBSVzFlD55dYaYtF1OGhq5TYuo6H2Qfm6vGWtR32qLmuxvjiy6_tY05HDAtYtpgCKJGRPJyQLASWjDobewstYKg2Z2mCxng0dOHSbIaekJoP0p8DL0bI7hxJcHp5hu_43R2WwWzIlOSFDkRgrUIBVkzDdXa2C9XfccQ8ZiwFV_MMseruSRCAPa4QwQhHLpDf4fCyasxBW3VqqExotzcindM3aGKyxvgnxx-C2BiyBi3mPtFtpduMOBqAzf5OrSzqoT8HWGxLM-MpCKcOh6gd0-5uVnl9MSyQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/dev/user/private",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"dev",
+								"user",
+								"private"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Dev",
+			"item": [
+				{
+					"name": "signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"renansx20@gmail.com\",\n    \"cpf\": \"60564413003\",\n    \"name\": \"Renan\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://4n83ef4y1d.execute-api.us-east-1.amazonaws.com/dev/user/signup",
+							"protocol": "https",
+							"host": [
+								"4n83ef4y1d",
+								"execute-api",
+								"us-east-1",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"dev",
+								"user",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"renansx2013@hotmail.com\",\n    \"cpf\": \"60564413003\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://4n83ef4y1d.execute-api.us-east-1.amazonaws.com/dev/user/login",
+							"protocol": "https",
+							"host": [
+								"4n83ef4y1d",
+								"execute-api",
+								"us-east-1",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"dev",
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "autenticate",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://4n83ef4y1d.execute-api.us-east-1.amazonaws.com/dev/user/private",
+							"protocol": "https",
+							"host": [
+								"4n83ef4y1d",
+								"execute-api",
+								"us-east-1",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"dev",
+								"user",
+								"private"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
