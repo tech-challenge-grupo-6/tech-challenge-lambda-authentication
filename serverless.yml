@@ -4,8 +4,8 @@ provider:
   name: aws
   runtime: nodejs18.x
   environment:
-    user_pool_id: "" #adicionar o user pool id
-    client_id: "" #adcionar o client id
+    user_pool_id: "__USER_POOL_ID__"
+    client_id: "__CLIENT_ID__"
   iamRoleStatements:
     - Effect: Allow
       Action:

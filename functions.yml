@@ -23,6 +23,6 @@ privateAPI:
         authorizer:
           name: PrivateAuthorizer
           type: COGNITO_USER_POOLS
-          arn: ""
+          arn: "__USER_POOL_ARN__"
           claims:
             - email
