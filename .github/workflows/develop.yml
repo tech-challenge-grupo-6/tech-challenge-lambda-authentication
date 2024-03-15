@@ -7,10 +7,6 @@ jobs:
   deploy-lambda:
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: ./resources
-
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -23,7 +19,7 @@ jobs:
           aws-region: us-east-1
 
       - name: Get Cognito Information
-        run:
+        run: |
           USER_POOL_ID=$(aws cognito-idp list-user-pools --max-results 60 | jq -r '.UserPools[] | select(.Name=="techchallenge-users") | .Id')
           CLIENT_ID=$(aws cognito-idp list-user-pool-clients --user-pool-id $USER_POOL_ID | jq -r '.UserPoolClients[0].ClientId')
           USER_POOL_ARN=$(aws cognito-idp describe-user-pool --user-pool-id $USER_POOL_ID | jq -r '.UserPool.Arn')
@@ -37,6 +33,9 @@ jobs:
           files: "serverless.yml"
           tokenPrefix: "__"
           tokenSuffix: "__"
+
+      - name: Cat "serverless.yml"
+        run: cat serverless.yml
 
       - name: Use Node.js 18
         uses: actions/setup-node@v1

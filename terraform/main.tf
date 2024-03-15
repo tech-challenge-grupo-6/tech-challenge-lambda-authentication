@@ -8,7 +8,7 @@ terraform {
 }
 
 provider "aws" {
-  region = "us-east-1" 
+  region = "us-east-1"
 }
 
 resource "aws_cognito_user_pool" "meu_user_pool" {
@@ -24,14 +24,14 @@ resource "aws_cognito_user_pool" "meu_user_pool" {
     require_uppercase = true
   }
 
-  username_attributes      = ["email"]
+  username_attributes = ["email"]
   account_recovery_setting {
     recovery_mechanism {
       name     = "verified_email"
       priority = 1
     }
   }
-  
+
   schema {
     attribute_data_type = "String"
     name                = "email"
@@ -45,11 +45,11 @@ resource "aws_cognito_user_pool" "meu_user_pool" {
   }
 
   schema {
-    attribute_data_type = "String"
+    attribute_data_type      = "String"
     developer_only_attribute = false
-    mutable = false
-    name    = "nome"
-    required = false
+    mutable                  = false
+    name                     = "nome"
+    required                 = false
 
     string_attribute_constraints {
       min_length = 1
@@ -58,11 +58,11 @@ resource "aws_cognito_user_pool" "meu_user_pool" {
   }
 
   schema {
-    attribute_data_type = "String"
+    attribute_data_type      = "String"
     developer_only_attribute = false
-    mutable = false
-    name    = "cpf"
-    required = false  # Alterado para false
+    mutable                  = false
+    name                     = "cpf"
+    required                 = false # Alterado para false
 
     string_attribute_constraints {
       min_length = 11
