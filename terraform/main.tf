@@ -23,42 +23,44 @@ resource "aws_cognito_user_pool" "meu_user_pool" {
     require_symbols   = true
     require_uppercase = true
   }
-    
-schema = [
-    {
-      attribute_data_type      = "String"
-      name                      = "email"
-      required                  = true
-      mutable                   = true
 
-      string_attribute_constraints {
-        min_length = 6
-        max_length = 255
-      }
-    },
-    {
-      attribute_data_type          = "String"
-      developer_only_attribute     = false
-      mutable                      = false
-      name                         = "cpf"
-      required                     = true
-      string_attribute_constraints = {
-        min_length = 1
-        max_length = 256
-      }
-    },
-    {
-      attribute_data_type          = "String"
-      developer_only_attribute     = false
-      mutable                      = true
-      name                         = "name"
-      required                     = false
-      string_attribute_constraints = {
-        min_length = 0
-        max_length = 256
-      }
+  schema {
+    attribute_data_type = "String"
+    name                = "email"
+    required            = true
+    mutable             = true
+
+    string_attribute_constraints {
+      min_length = 6
+      max_length = 255
     }
-  ] 
+  }
+
+  schema {
+    attribute_data_type = "String"
+    developer_only_attribute = false
+    mutable = false
+    name    = "cpf"
+    required = false  # Alterado para false
+
+    string_attribute_constraints {
+      min_length = 11
+      max_length = 11
+    }
+  }
+
+  schema {
+    attribute_data_type = "String"
+    developer_only_attribute = false
+    mutable = true
+    name    = "name"
+    required = false
+
+    string_attribute_constraints {
+      min_length = 0
+      max_length = 256
+    }
+  }
 
   email_verification_message = "Seu código de verificação é {####}."
   email_verification_subject = "Seu código de verificação"
