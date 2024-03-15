@@ -24,6 +24,14 @@ resource "aws_cognito_user_pool" "meu_user_pool" {
     require_uppercase = true
   }
 
+  username_attributes      = ["email"]
+  account_recovery_setting {
+    recovery_mechanism {
+      name     = "verified_email"
+      priority = 1
+    }
+  }
+  
   schema {
     attribute_data_type = "String"
     name                = "email"
@@ -40,25 +48,25 @@ resource "aws_cognito_user_pool" "meu_user_pool" {
     attribute_data_type = "String"
     developer_only_attribute = false
     mutable = false
-    name    = "cpf"
-    required = false  # Alterado para false
+    name    = "nome"
+    required = false
 
     string_attribute_constraints {
-      min_length = 11
-      max_length = 11
+      min_length = 1
+      max_length = 256
     }
   }
 
   schema {
     attribute_data_type = "String"
     developer_only_attribute = false
-    mutable = true
-    name    = "name"
-    required = false
+    mutable = false
+    name    = "cpf"
+    required = false  # Alterado para false
 
     string_attribute_constraints {
-      min_length = 0
-      max_length = 256
+      min_length = 11
+      max_length = 11
     }
   }
 
