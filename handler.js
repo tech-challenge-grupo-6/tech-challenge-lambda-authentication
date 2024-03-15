@@ -26,7 +26,7 @@ module.exports.signup = async (event) => {
         Name: 'email',
         Value: email
       },{
-        Name: 'custom:name',
+        Name: 'custom:nome',
         Value: name
       },{
         Name: 'custom:cpf',
