@@ -20,7 +20,7 @@ module.exports.signup = async (event) => {
     const { user_pool_id } = process.env
       
     const params = {
-      UserPoolId: "us-east-1_lnmvkmOPF",
+      UserPoolId: user_pool_id,
       Username: email,
       UserAttributes: [{
         Name: 'email',
