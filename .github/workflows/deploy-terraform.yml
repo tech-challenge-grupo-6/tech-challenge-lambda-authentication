@@ -4,36 +4,45 @@ on:
   workflow_dispatch:
 
 jobs:
-  terraform-aws:
-    name: "Terraform AWS"
+  plan-dev:
+    name: 'terraform-plan-dev'
     runs-on: ubuntu-latest
 
     defaults:
       run:
+        shell: bash
         working-directory: ./terraform
 
     steps:
-      - name: "Checkout"
-        uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v2
 
-      - name: "Setup Terraform"
+        # Instale a versão mais recente do Terraform CLI e configure o arquivo de configuração Terraform CLI com um token de API de usuário do Terraform Cloud
+      - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
 
-      - name: "Configure AWS Credentials"
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
+      # Inicialize um diretório de trabalho novo ou existente do Terraform criando arquivos iniciais, carregando qualquer estado remoto, baixando módulos, etc.
+      - name: Terraform Init
+        run: terraform init
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
-      - name: "Terraform Init"
-        run: terraform init -backend=false
+      # Verifica se todos os arquivos de configuração do Terraform seguem um formato canônico
+      - name: Terraform Format
+        run: terraform fmt -check
 
-      - name: Terraform Validate
-        run: terraform validate
+      # Gera um plano de execução para Terraform
+      - name: Terraform Plan
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: terraform plan
 
-      - name: "Terraform Plan"
-        run: terraform plan -no-color
-
+        # No push do main, construa ou altere a infraestrutura de acordo com os arquivos de configuração do Terraform
       - name: Terraform Apply
         run: terraform apply -auto-approve
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
