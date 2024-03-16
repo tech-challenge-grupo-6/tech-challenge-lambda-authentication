@@ -4,8 +4,8 @@ provider:
   name: aws
   runtime: nodejs18.x
   environment:
-    user_pool_id: "__USER_POOL_ID__" #adicionar o user pool id
-    client_id: "__CLIENT_ID__" #adcionar o client id
+    user_pool_id: "__USER_POOL_ID__"
+    client_id: "__CLIENT_ID__"
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -14,34 +14,7 @@ provider:
         - cognito-idp:AdminSetUserPassword
       Resource: "*"
 functions:
-  loginUser:
-    handler: handler.login
-    events:
-      - http:
-          path: user/login
-          method: post
-          cors: true
-  signupUser:
-    handler: handler.signup
-    events:
-      - http:
-          path: user/signup
-          method: post
-          cors: true
-  privateAPI:
-    handler: handler.private
-    events:
-      - http:
-          path: user/private
-          method: post
-          cors: true
-          integration: lambda
-          authorizer:
-            name: PrivateAuthorizer
-            type: COGNITO_USER_POOLS
-            arn: "__USER_POOL_ARN__" #adicionar o arn
-            claims:
-              - email
+  - ${file(functions.yml)}
 custom:
   prune:
     automatic: true

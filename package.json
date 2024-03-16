@@ -5,6 +5,7 @@
   "main": "handler.js",
   "scripts": {
     "start": "nodemon -e js  --exec \"sls offline start\"",
+    "deploy": "sls deploy",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
