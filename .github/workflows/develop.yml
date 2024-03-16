@@ -30,7 +30,7 @@ jobs:
       - name: Replace tokens in Kubernetes files
         uses: cschleiden/replace-tokens@v1
         with:
-          files: "[*.yml]"
+          files: '["*.yml"]'
           tokenPrefix: "__"
           tokenSuffix: "__"
 
