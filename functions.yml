@@ -21,7 +21,7 @@ privateAPI:
         cors: true
         #integration: lambda
         authorizer:
-          name: PrivateAuthorizer
+          name: CognitoAuthorizer
           type: COGNITO_USER_POOLS
           arn: "__USER_POOL_ARN__"
           #claims:
