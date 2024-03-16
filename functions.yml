@@ -19,10 +19,10 @@ privateAPI:
         path: user/private
         method: post
         cors: true
-        integration: lambda
+        #integration: lambda
         authorizer:
           name: PrivateAuthorizer
           type: COGNITO_USER_POOLS
           arn: "__USER_POOL_ARN__"
-          claims:
-            - email
+          #claims:
+          #  - email
