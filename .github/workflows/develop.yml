@@ -30,12 +30,15 @@ jobs:
       - name: Replace tokens in Kubernetes files
         uses: cschleiden/replace-tokens@v1
         with:
-          files: "serverless.yml"
+          files: '["*.yml"]'
           tokenPrefix: "__"
           tokenSuffix: "__"
 
       - name: Cat "serverless.yml"
         run: cat serverless.yml
+
+      - name: Cat "functions.yml"
+        run: cat functions.yml
 
       - name: Use Node.js 18
         uses: actions/setup-node@v1
