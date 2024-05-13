@@ -103,7 +103,9 @@ module.exports.login = async (event) => {
         statusCode: 200,
         body: JSON.stringify({
           message: 'Success',
-          token: response.AuthenticationResult.IdToken
+          idToken: response.AuthenticationResult.IdToken,
+          accessToken: response.AuthenticationResult.AccessToken,
+          refreshToken: response.AuthenticationResult.RefreshToken
         })
       }
     } else {
